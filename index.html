@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Oficial das Faltas do Tony 🍺</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --beer:    #F5A623;
+      --dark:    #2C1A0E;
+      --brown:   #6B3A2A;
+      --cream:   #FFF8E7;
+      --foam:    #FFFDF5;
+      --amber:   #C47F17;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 4px solid var(--beer);
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .site-title {
+      font-family: 'Bangers', cursive;
+      font-size: 1.6rem;
+      color: var(--beer);
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+    .site-title span { color: #fff; }
+    .badge-oficial {
+      background: var(--beer);
+      color: var(--dark);
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--brown) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🍺';
+      position: absolute;
+      font-size: 14rem;
+      opacity: .05;
+      top: -20px;
+      left: -40px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '🍺';
+      position: absolute;
+      font-size: 14rem;
+      opacity: .05;
+      bottom: -20px;
+      right: -40px;
+      pointer-events: none;
+    }
+    .hero__name {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(3rem, 10vw, 6rem);
+      color: var(--beer);
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .hero__subtitle {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: rgba(255,255,255,.7);
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .hero__stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hstat {
+      text-align: center;
+    }
+    .hstat__num {
+      font-family: 'Bangers', cursive;
+      font-size: 3rem;
+      color: var(--beer);
+      line-height: 1;
+    }
+    .hstat__label {
+      font-size: .75rem;
+      color: rgba(255,255,255,.5);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 4px;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 60px 0;
+    }
+    .section__title {
+      font-family: 'Bangers', cursive;
+      font-size: 2.2rem;
+      letter-spacing: 1.5px;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+    .section__tag {
+      display: inline-block;
+      background: var(--beer);
+      color: var(--dark);
+      font-size: .72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ── COUNTER ── */
+    .counter-box {
+      background: var(--dark);
+      border-radius: 20px;
+      padding: 40px 24px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .counter-box::before {
+      content: '🍺🍺🍺';
+      position: absolute;
+      font-size: 5rem;
+      opacity: .06;
+      bottom: -10px;
+      right: 10px;
+      pointer-events: none;
+    }
+    .counter-label {
+      font-size: .85rem;
+      color: rgba(255,255,255,.5);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 12px;
+    }
+    .counter-num {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(5rem, 18vw, 8rem);
+      color: var(--beer);
+      line-height: 1;
+      display: block;
+      transition: transform .2s;
+    }
+    .counter-num.bump {
+      transform: scale(1.12);
+    }
+    .counter-sub {
+      font-size: .85rem;
+      color: rgba(255,255,255,.4);
+      margin-top: 8px;
+    }
+    .btn-register {
+      margin-top: 28px;
+      background: var(--beer);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: transform .15s, opacity .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-register:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-register:active { transform: scale(.97); }
+
+    .toast-area {
+      margin-top: 20px;
+      min-height: 32px;
+    }
+    .toast {
+      display: inline-block;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: .88rem;
+      color: rgba(255,255,255,.85);
+      animation: fadeIn .3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── EXCUSAS ── */
+    .excusas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .excusa-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      border: 2px solid var(--cream);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      transition: transform .2s;
+    }
+    .excusa-card:hover { transform: translateY(-3px); }
+    .excusa-card__emoji { font-size: 2rem; margin-bottom: 10px; }
+    .excusa-card__title {
+      font-weight: 700;
+      font-size: .92rem;
+      color: var(--brown);
+      margin-bottom: 6px;
+    }
+    .excusa-card__text {
+      font-size: .83rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    .excusa-card__verdict {
+      margin-top: 10px;
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── COMPLAINT FORM ── */
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 7px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      color: var(--dark);
+      background: #fafafa;
+      transition: border-color .15s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--beer);
+      background: #fff;
+    }
+    select.form-control { cursor: pointer; }
+    textarea.form-control { resize: vertical; min-height: 100px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--dark);
+      color: var(--beer);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: opacity .2s;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { opacity: .88; }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success__emoji { font-size: 4rem; margin-bottom: 16px; }
+    .form-success__title {
+      font-family: 'Bangers', cursive;
+      font-size: 2rem;
+      color: var(--brown);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .form-success__text { font-size: .9rem; color: #666; line-height: 1.6; }
+
+    /* ── FEED ── */
+    .feed {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feed-item {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--beer);
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .feed-item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .feed-item__author {
+      font-weight: 700;
+      font-size: .82rem;
+      color: var(--brown);
+    }
+    .feed-item__time {
+      font-size: .75rem;
+      color: #aaa;
+    }
+    .feed-item__text {
+      font-size: .85rem;
+      color: #444;
+      line-height: 1.55;
+    }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .stat-card {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-card__num {
+      font-family: 'Bangers', cursive;
+      font-size: 2.8rem;
+      color: var(--beer);
+      line-height: 1;
+    }
+    .stat-card__label {
+      font-size: .75rem;
+      color: rgba(255,255,255,.5);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 6px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 2px dashed rgba(0,0,0,.1);
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: .8rem;
+      line-height: 1.7;
+      border-top: 4px solid var(--beer);
+    }
+    footer strong { color: var(--beer); }
+
+    /* ── ALERT BANNER ── */
+    .alert-banner {
+      background: var(--beer);
+      color: var(--dark);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 500px) {
+      .hero__stats { gap: 20px; }
+      .form-card { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alert-banner">
+    🚨 ATENÇÃO: Este portal é monitorizado 24h — pelo menos por alguém, já que o Tony não está no trabalho.
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="site-title">🍺 <span>Portal</span> das Faltas</div>
+      <span class="badge-oficial">Certificado ISO 99% Falta</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__name">TONY MENDES</div>
+    <div class="hero__subtitle">aka Pedro Mendes · Mestre em Faltar · Doutor em Desculpas</div>
+    <div class="hero__stats">
+      <div class="hstat">
+        <div class="hstat__num" id="heroFaltas">—</div>
+        <div class="hstat__label">Faltas registadas</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__num">12%</div>
+        <div class="hstat__label">Taxa de presença</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat__num" id="heroBeers">—</div>
+        <div class="hstat__label">🍺 Consumidas (estimativa)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section class="section" style="background: var(--foam);">
+    <div class="container">
+      <span class="section__tag">🚨 Ferramenta oficial</span>
+      <h2 class="section__title">Registar Nova Falta</h2>
+      <p style="color:#666; margin-bottom:24px; font-size:.92rem;">Cada clique conta uma ausência não justificada, não aprovada e muito suspeita.</p>
+      <div class="counter-box">
+        <div class="counter-label">Total de Faltas do Tony</div>
+        <span class="counter-num" id="counterNum">0</span>
+        <div class="counter-sub">Registadas neste dispositivo · Atualiza em tempo real (mais ou menos)</div>
+        <div>
+          <button class="btn-register" onclick="registerFalta()">
+            🚨 REGISTAR FALTA
+          </button>
+        </div>
+        <div class="toast-area">
+          <div class="toast" id="toastMsg" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- EXCUSAS -->
+  <section class="section">
+    <div class="container">
+      <span class="section__tag">📚 Arquivo Histórico</span>
+      <h2 class="section__title">As Desculpas Clássicas do Tony</h2>
+      <p style="color:#666; margin-bottom:4px; font-size:.92rem;">Colecção curada pelos colegas de trabalho. Atualizada regularmente.</p>
+      <div class="excusas-grid">
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">🚗</div>
+          <div class="excusa-card__title">"O carro avariou"</div>
+          <div class="excusa-card__text">Clássico intemporal. Usado em média 2,3 vezes por mês. O carro avaria seletivamente às segundas e às sextas.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 4%</span>
+        </div>
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">🤒</div>
+          <div class="excusa-card__title">"Estou com febre"</div>
+          <div class="excusa-card__text">Curiosamente, a febre costuma aparecer ao domingo à noite e desaparece ao sábado de manhã.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 7%</span>
+        </div>
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">🚦</div>
+          <div class="excusa-card__title">"Engarrafamento enorme"</div>
+          <div class="excusa-card__text">Reportado também em dias de pouco trânsito, fins de semana e uma vez às 6h da manhã.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 11%</span>
+        </div>
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">👵</div>
+          <div class="excusa-card__title">"Tenho de levar a minha avó ao médico"</div>
+          <div class="excusa-card__text">A avó do Tony tem mais consultas médicas do que qualquer pessoa com 200 anos.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 2%</span>
+        </div>
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">🔌</div>
+          <div class="excusa-card__title">"Não tinha internet para o trabalho remoto"</div>
+          <div class="excusa-card__text">Mais tarde foi visto a postar stories no Instagram com Wi-Fi 5G de um bar.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 0%</span>
+        </div>
+        <div class="excusa-card">
+          <div class="excusa-card__emoji">🌧️</div>
+          <div class="excusa-card__title">"Estava mau tempo"</div>
+          <div class="excusa-card__text">Usada em dia de sol, 28 graus. O Tony tem uma relação complicada com o boletim meteorológico.</div>
+          <span class="excusa-card__verdict">Plausibilidade: 1%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- PARTICIPAÇÕES RECENTES -->
+  <section class="section" style="background: var(--foam);">
+    <div class="container">
+      <span class="section__tag">📣 Comunidade</span>
+      <h2 class="section__title">Participações Recentes</h2>
+      <p style="color:#666; margin-bottom:4px; font-size:.92rem;">O que os colegas andam a dizer. Anonimamente. Por segurança.</p>
+      <div class="feed">
+        <div class="feed-item">
+          <div class="feed-item__header">
+            <span class="feed-item__author">Colega Anónimo A</span>
+            <span class="feed-item__time">há 23 minutos</span>
+          </div>
+          <div class="feed-item__text">Marcou presença no grupo do WhatsApp às 9h02 mas não apareceu no escritório. Enviou um áudio de 3 minutos a explicar a situação. Ninguém ouviu.</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-item__header">
+            <span class="feed-item__author">Colega Anónimo B</span>
+            <span class="feed-item__time">há 2 horas</span>
+          </div>
+          <div class="feed-item__text">Ontem disse que ia de férias "uns dias". Já passaram 11 dias. Nenhuma data de regresso confirmada. A planta da secretária dele está a morrer.</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-item__header">
+            <span class="feed-item__author">Colega Anónimo C</span>
+            <span class="feed-item__time">há 1 dia</span>
+          </div>
+          <div class="feed-item__text">Vi-o ontem às 14h num café a jogar totobola. Hoje disse que "não estava a sentir-se bem desde segunda-feira".</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-item__header">
+            <span class="feed-item__author">Colega Anónimo D</span>
+            <span class="feed-item__time">há 3 dias</span>
+          </div>
+          <div class="feed-item__text">Recebeu uma encomenda no trabalho. Não veio buscar. Pediu para eu guardar "até quinta". Já é sexta da semana seguinte.</div>
+        </div>
+        <div class="feed-item" id="newComplaintFeed" style="display:none; border-color: #22c55e;">
+          <div class="feed-item__header">
+            <span class="feed-item__author">Tu (agora mesmo)</span>
+            <span class="feed-item__time">há segundos</span>
+          </div>
+          <div class="feed-item__text" id="newComplaintText"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FORMULÁRIO DE PARTICIPAÇÃO -->
+  <section class="section">
+    <div class="container">
+      <span class="section__tag">📋 Formulário oficial</span>
+      <h2 class="section__title">Submeter Participação Formal</h2>
+      <p style="color:#666; margin-bottom:24px; font-size:.92rem;">Documento vinculativo. Será analisado por uma comissão. Que também está de falta.</p>
+      <div class="form-card">
+        <div id="formContent">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div class="form-group">
+              <label>Data da falta</label>
+              <input type="date" class="form-control" id="faltaDate">
+            </div>
+            <div class="form-group">
+              <label>Quem reporta</label>
+              <input type="text" class="form-control" id="reporterName" placeholder="Ex: Colega sofredor">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Desculpa utilizada pelo Tony</label>
+            <select class="form-control" id="excusaSelect">
+              <option value="">— Selecionar desculpa —</option>
+              <option>🚗 O carro avariou (outra vez)</option>
+              <option>🤒 Estava doente (suspeita de cerveja)</option>
+              <option>🚦 Engarrafamento misterioso</option>
+              <option>👵 A avó precisou de ajuda</option>
+              <option>🔌 Problemas de internet</option>
+              <option>🌧️ Mau tempo (estava sol)</option>
+              <option>😴 "Esqueci-me"</option>
+              <option>🍺 Motivo não divulgado (cerveja provável)</option>
+              <option>🤷 Sem desculpa — apareceu segunda à tarde como se nada fosse</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Descrição detalhada do incidente</label>
+            <textarea class="form-control" id="descricao" placeholder="Descreva o sucedido com o máximo de detalhe dramático possível..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Nível de indignação</label>
+            <select class="form-control" id="indigLevel">
+              <option>😤 Moderado — já estou habituado</option>
+              <option>😠 Elevado — isto é a gota de água</option>
+              <option>🤬 Máximo — preciso de férias depois disto</option>
+              <option>😂 Nenhum — é hilariante a esta altura</option>
+            </select>
+          </div>
+          <button class="btn-submit" onclick="submitComplaint()">
+            📨 Enviar para o RH (que também está de falta)
+          </button>
+          <p style="margin-top:12px; font-size:.75rem; color:#aaa; text-align:center;">
+            * Esta participação será arquivada na pasta "Para tratar" que nunca é aberta.
+          </p>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success__emoji">✅🍺</div>
+          <div class="form-success__title">Participação Registada!</div>
+          <div class="form-success__text" id="successMsg"></div>
+          <button onclick="resetForm()" style="margin-top:20px; background:var(--beer); color:var(--dark); border:none; padding:10px 24px; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif;">
+            Submeter outra
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ESTATÍSTICAS -->
+  <section class="section" style="background: var(--foam);">
+    <div class="container">
+      <span class="section__tag">📊 Dados Científicos</span>
+      <h2 class="section__title">Estatísticas do Tony</h2>
+      <p style="color:#666; margin-bottom:4px; font-size:.92rem;">Baseadas em observação direta, rumores e deduções lógicas.</p>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card__num" id="statFaltas">0</div>
+          <div class="stat-card__label">Faltas registadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num">12%</div>
+          <div class="stat-card__label">Taxa de presença no trabalho</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="statBeers">0</div>
+          <div class="stat-card__label">🍺 Cervejas estimadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num">∞</div>
+          <div class="stat-card__label">Criatividade nas desculpas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num">9/10</div>
+          <div class="stat-card__label">Simpático apesar de tudo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num">0</div>
+          <div class="stat-card__label">Remorsos conhecidos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="font-size:2rem; margin-bottom:8px;">🍺</div>
+    <strong>Portal Oficial das Faltas do Tony</strong><br>
+    Plataforma certificada pela <em>Associação Internacional de Trabalhadores que Aparecem</em><br>
+    <br>
+    © 2025 · Feito com amor e indignação pelos colegas do Tony<br>
+    <span style="font-size:.72rem; opacity:.6;">Tony Mendes não foi consultado na criação deste portal. Provavelmente estava de falta.</span>
+  </footer>
+
+  <script>
+    var FALTAS_KEY = 'tony_faltas_v1';
+
+    var toastMessages = [
+      '🍺 Falta registada. Motivo provável: cerveja.',
+      '📝 Adicionado ao registo. O Tony nem vai notar.',
+      '🚨 Alerta enviado para o supervisor... que também está de falta.',
+      '✅ Confirmado. O Tony estava certamente noutro sítio melhor.',
+      '🕵️ Investigação em curso. Resultados em 3 a 5 dias úteis (se aparecerem).',
+      '📊 Estatísticas atualizadas. A tendência é preocupante.',
+      '🍺 Mais uma para o arquivo histórico.',
+      '😤 Indignação registada com sucesso.',
+      '🎯 Falta confirmada. A cerveja não se bebe sozinha, ao que parece.',
+      '🏆 Parabéns Tony — novo recorde pessoal.'
+    ];
+
+    var toastIndex = 0;
+
+    function getCount() {
+      return parseInt(localStorage.getItem(FALTAS_KEY) || '0');
+    }
+
+    function saveCount(n) {
+      localStorage.setItem(FALTAS_KEY, n);
+    }
+
+    function updateDisplay(n) {
+      document.getElementById('counterNum').textContent = n;
+      document.getElementById('heroFaltas').textContent = n;
+      document.getElementById('statFaltas').textContent = n;
+      var beers = Math.round(n * 2.4);
+      document.getElementById('heroBeers').textContent = beers;
+      document.getElementById('statBeers').textContent = beers;
+    }
+
+    function registerFalta() {
+      var n = getCount() + 1;
+      saveCount(n);
+      updateDisplay(n);
+
+      var num = document.getElementById('counterNum');
+      num.classList.remove('bump');
+      void num.offsetWidth;
+      num.classList.add('bump');
+      setTimeout(function() { num.classList.remove('bump'); }, 300);
+
+      var msg = toastMessages[toastIndex % toastMessages.length];
+      toastIndex++;
+      var toast = document.getElementById('toastMsg');
+      toast.textContent = msg;
+      toast.style.display = 'inline-block';
+      toast.style.animation = 'none';
+      void toast.offsetWidth;
+      toast.style.animation = '';
+    }
+
+    var successMessages = [
+      'A sua participação foi registada, carimbada, assinada e colocada na pasta "Urgente" — que o Tony nunca abre.',
+      'Mensagem recebida! A comissão de análise reunirá brevemente. Previsão: nunca, porque o Tony é o presidente da comissão.',
+      'Participação formal submetida com sucesso ao departamento de RH. Estão de férias até setembro. Do próximo ano.',
+      'Processado! O algoritmo avançado de deteção de faltas confirmou: "É mesmo o Tony".',
+      'Registado! Esta participação junta-se a outras 127 à espera de ser analisada. A fila anda bem, considerando.'
+    ];
+
+    function submitComplaint() {
+      var excusa = document.getElementById('excusaSelect').value;
+      var descricao = document.getElementById('descricao').value;
+
+      var feedText = excusa
+        ? 'Participação sobre falta com desculpa: "' + excusa + '".'
+        : 'Participação submetida.';
+      if (descricao) feedText += ' Detalhes: ' + descricao;
+
+      document.getElementById('newComplaintText').textContent = feedText;
+      document.getElementById('newComplaintFeed').style.display = 'block';
+
+      var msg = successMessages[Math.floor(Math.random() * successMessages.length)];
+      document.getElementById('successMsg').textContent = msg;
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+
+      // Count as a falta too
+      var n = getCount() + 1;
+      saveCount(n);
+      updateDisplay(n);
+    }
+
+    function resetForm() {
+      document.getElementById('formContent').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+      document.getElementById('excusaSelect').value = '';
+      document.getElementById('descricao').value = '';
+      document.getElementById('reporterName').value = '';
+    }
+
+    // Set today's date
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('faltaDate').value = today;
+
+    // Init
+    updateDisplay(getCount());
+  </script>
+</body>
+</html>
