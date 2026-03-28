@@ -729,7 +729,7 @@
     var toastIndex = 0;
 
     function getCount() {
-      return parseInt(localStorage.getItem(FALTAS_KEY) || '0');
+      return parseInt(localStorage.getItem(FALTAS_KEY) || '75');
     }
 
     function saveCount(n) {
@@ -740,7 +740,7 @@
       document.getElementById('counterNum').textContent = n;
       document.getElementById('heroFaltas').textContent = n;
       document.getElementById('statFaltas').textContent = n;
-      var beers = Math.round(n * 2.4);
+      var beers = 394 + Math.round(n * 2.4); /* base 394 + 2.4/falta → 574 cervejas a 75 faltas */
       document.getElementById('heroBeers').textContent = beers;
       document.getElementById('statBeers').textContent = beers;
     }
